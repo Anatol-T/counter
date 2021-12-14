@@ -1,38 +1,106 @@
-.App {
-  text-align: center;
+.Main {
+    display: flex;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@media (max-width: 900px) {
+    .Main {
+        display: block;
+    }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Screen {
+    text-align: center;
+    height: 350px;
+    min-width: 40%;
+    border: solid skyblue;
+    border-radius: 15px;
+    margin: 150px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Display {
+    border: solid skyblue;
+    border-radius: 15px;
+    height: 50%;
+    width: 95%;
+    background-color: skyblue;
+    display: inline-flex;
+    justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+.message {
+    align-self: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.settingsDisplay {
+    border: solid skyblue;
+    border-radius: 15px;
+    height: 50%;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
+
+.inputSet {
+
+}
+
+.inputText {
+    display: inline-block;
+    color: skyblue;
+    font-size: 1.5rem;
+    width: 50%;
+    margin: 0;;
+}
+
+.input {
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    width: 40%;
+    color: #383838;
+}
+
+.buttonsSet {
+    border: solid skyblue;
+    border-radius: 15px;
+    height: 30%;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.button {
+    border: solid skyblue;
+    border-radius: 15px;
+    color: #383838;
+    width: 40%;
+    background-color: skyblue;
+    user-select: none;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+.button:active {
+    position: relative;
+    top: 1px;
+}
+
+.button:hover {
+    background: skyblue linear-gradient(to bottom, #61a6e7 0%, skyblue 100%);
+}
+
+.button:disabled {
+    cursor: auto;
+    background: skyblue;
+    opacity: 50%;
+}
+
+
+
