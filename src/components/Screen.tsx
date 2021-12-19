@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from "./Button";
+import {MessageTpe} from "../App";
 
 type PropsType = {
   counter: number
-  message: string
+  message: MessageTpe
   maxCount: number
   startCount: number
   setting: boolean

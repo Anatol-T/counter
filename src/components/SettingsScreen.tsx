@@ -10,19 +10,22 @@ type PropsType = {
   setStartHandler: (stVal: number) => void
   set: () => void
 }
-const SettingsScreen: React.FC<PropsType> = ({maxValue, startValue, ...props}) => {
+const SettingsScreen: React.FC<PropsType> = (
+  {maxValue, startValue, ...props}
+) => {
   const stl = props.err
     ? {border: "5px solid red", backgroundColor: "pink"}
     : {border: "5px solid skyblue"}
+
   return (
     <div className="Screen">
       <div className="settingsDisplay">
         <div className="inputSet">
           <p className="inputText">max value:&#160; &#160;</p>
           <input
-            className="input" type="number" value={maxValue}
+            className="input" type="number" value={maxValue.toString()}
             style={stl}
-            onKeyPress={(e) => e.preventDefault()}
+            onKeyPress={(e) =>  e.preventDefault()}
             onChange={(e) => {
               props.setMaxHandler(+e.currentTarget.value)
             }}/>
@@ -30,7 +33,7 @@ const SettingsScreen: React.FC<PropsType> = ({maxValue, startValue, ...props}) =
         <div className="inputSet">
           <p className="inputText">start value: &#160; &#160;</p>
           <input
-            className="input" type="number" value={startValue}
+            className="input" type="number" value={startValue.toString()}
             style={stl}
             onKeyPress={(e) => e.preventDefault()}
             onChange={(e) => {
