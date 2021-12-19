@@ -6,7 +6,7 @@ import Screen from "./components/Screen";
 export type MessageTpe = "" | "select values and hit: Set" | "Incorrect Value!"
 
 function App() {
-console.log("test")
+//test
   const [counter, setCounter] = useState<number>(0);
   const [maxCount, setMaxCount] = useState<number>(5);
   const [startCount, setStartCount] = useState<number>(0)
