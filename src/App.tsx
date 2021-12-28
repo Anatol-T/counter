@@ -28,7 +28,7 @@ function App() {
 
   const setMaxHandler = (max: number) => {
     setSetting(true)
-    if (max >= startCount) {
+    if (max >= 0) {
       setMaxCount(max)
       setErr(false)
       setMessage("select values and hit: Set")
@@ -40,7 +40,7 @@ function App() {
   }
   const setStartHandler = (stVal: number) => {
     setSetting(true)
-    if (stVal >= 0 && stVal <= maxCount) {
+    if (stVal >= 0 ) {
       setStartCount(stVal)
       setErr(false)
       setMessage("select values and hit: Set")
@@ -57,13 +57,19 @@ function App() {
   const reset = () => {
     if (counter > 0) setCounter(startCount)
   }
+
   const set = () => {
-    setSetting(false)
-    setCounter(startCount)
-    setErr(false)
-    setMessage('')
-    localStorage
-      .setItem("counter settings", JSON.stringify([maxCount, startCount]))
+    if ( maxCount >= startCount) {
+      setSetting(false)
+      setCounter(startCount)
+      setErr(false)
+      setMessage('')
+      localStorage
+        .setItem("counter settings", JSON.stringify([maxCount, startCount]))
+    } else {
+      setErr(true)
+      setMessage("Incorrect Value!")
+    }
   }
 
   return (
@@ -91,3 +97,34 @@ function App() {
 }
 
 export default App;
+// const setMaxHandler = (max: number) => {
+//   setSetting(true)
+//   if (max >= startCount) {
+//     setMaxCount(max)
+//     setErr(false)
+//     setMessage("select values and hit: Set")
+//   } else {
+//     setErr(true)
+//     setMessage("Incorrect Value!")
+//   }
+//
+// }
+// const setStartHandler = (stVal: number) => {
+//   setSetting(true)
+//   if (stVal >= 0 && stVal <= maxCount) {
+//     setStartCount(stVal)
+//     setErr(false)
+//     setMessage("select values and hit: Set")
+//   } else {
+//     setErr(true)
+//     setMessage("Incorrect Value!")
+//   }
+// }
+// const set = () => {
+//   setSetting(false)
+//   setCounter(startCount)
+//   setErr(false)
+//   setMessage('')
+//   localStorage
+//     .setItem("counter settings", JSON.stringify([maxCount, startCount]))
+// }
