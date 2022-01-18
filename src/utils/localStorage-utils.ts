@@ -1,14 +1,19 @@
+import {AppStateType} from "../redux/store";
 
-export {}
-// export const loadState = () => {
-//   try {
-//     const serializedState = localStorage.getItem('app-state')
-//     if (serializedState) {
-//       return undefined;
-//     } else {
-//       // return JSON.parse(serializedState)
-//     }
-//   } catch () {
-//
-//   }
-// }
+export const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('app-state')
+    if (serializedState === null) {
+      return undefined;
+    } else {
+      return JSON.parse(serializedState)
+    }
+  } catch (err) {
+    return undefined
+  }
+}
+
+export const saveState = (state: AppStateType) => {
+  const serializedState = JSON.stringify(state)
+  localStorage.setItem('app-state', serializedState)
+}

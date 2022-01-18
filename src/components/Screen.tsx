@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from "./Button";
-import {MessageType} from "../App";
+import {MessageType} from "../redux/counterReducer";
+
 
 type PropsType = {
   counter: number
@@ -47,6 +48,6 @@ const Screen: React.FC<PropsType> =
     );
   };
 
-Screen.propTypes = {};
+// Screen.propTypes = {};
 
 export default Screen;

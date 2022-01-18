@@ -6,68 +6,53 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "./redux/store";
 import {
   CounterStateType,
-  incAC,
-  resetAC,
-  setAC,
-  setErrorMessageAC,
+  incCounterAC,
+  resetCounterAC,
+  setRunMode,
+  setErrorModeAC,
   setMaxCountAC,
   setStartCountAC
 } from "./redux/counterReducer";
 
-export type MessageType = "" | "select values and hit: Set" | "Incorrect Value!"
 
 function App() {
 
   const {counter, maxCount, startCount, setting, err, message} =
-    useSelector<AppStateType, CounterStateType>(state=> state.counter)
+    useSelector<AppStateType, CounterStateType>(state=> state.counterState)
 
   const dispatch = useDispatch()
 
-
-  // useEffect(()=>{
-  //   let savedSettings = localStorage.getItem("counter settings");
-  //   if (savedSettings) {
-  //     savedSettings = JSON.parse(savedSettings)
-  //   }
-  //   if (savedSettings) {
-  //     setMaxCount(+savedSettings[0])
-  //     setStartCount(+savedSettings[1])
-  //     setCounter(+savedSettings[1])
-  //   }
-  // },[])
-
   const setMaxHandler = (newMax: number) => {
-
     if (newMax >= 0) {
       dispatch(setMaxCountAC(newMax))
     } else {
-      dispatch(setErrorMessageAC())
+      dispatch(setErrorModeAC())
     }
-
   }
+
   const setStartHandler = (newStart: number) => {
     if (newStart >= 0 ) {
       dispatch(setStartCountAC(newStart))
     } else {
-      dispatch(setErrorMessageAC())
+      dispatch(setErrorModeAC())
     }
   }
+
   const inc = () => {
     if (counter < maxCount) {
-      dispatch(incAC())
+      dispatch(incCounterAC())
     }
   }
+
   const reset = () => {
-    dispatch(resetAC())
+    dispatch(resetCounterAC())
   }
 
   const set = () => {
     if ( maxCount >= startCount) {
-      // localStorage
-      //   .setItem("counter settings", JSON.stringify([maxCount, startCount]))
-      dispatch(setAC())
+      dispatch(setRunMode())
     } else {
-      dispatch(setErrorMessageAC())
+      dispatch(setErrorModeAC())
     }
   }
 

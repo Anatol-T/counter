@@ -35,18 +35,17 @@ const SettingsScreen: React.FC<PropsType> = (
           <input
             className="input" type="number" value={startValue.toString()}
             style={stl}
-            //onKeyPress={(e) => e.preventDefault()}
             onChange={(e) => {
-              props.setStartHandler(+e.currentTarget.value)
+              props.setStartHandler(e.currentTarget.valueAsNumber)
             }}/>
         </div>
       </div>
       <div className="buttonsSet">
-        <Button className="button"
-                onClick={props.set}
-                disabled={!props.setting}
+        <Button
+          className="button"
+          onClick={props.set}
+          disabled={!props.setting}
         >set</Button>
-
       </div>
     </div>
   );

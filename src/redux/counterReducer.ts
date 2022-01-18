@@ -1,4 +1,4 @@
-import {MessageType} from "../App";
+export type MessageType = "" | "select values and hit: Set" | "Incorrect Value!"
 
 export type CounterStateType = typeof initialState;
 const initialState = {
@@ -16,12 +16,10 @@ export const counterReducer = (state: CounterStateType = initialState, actions: 
       return {...state, counter: state.counter + 1}
     case "RESET":
       return {...state, counter: state.startCount}
-    case "SET":
+    case "SET-RUN-MODE":
       return {...state, counter: state.startCount, ...actions.payload}
-    case "ERR-MESSAGE":
-      return {...state, ...actions.payload}
+    case "ERROR-MODE":
     case "SET-MAX":
-      return {...state, ...actions.payload}
     case "SET-START":
       return {...state, ...actions.payload}
     default:
@@ -32,20 +30,16 @@ export const counterReducer = (state: CounterStateType = initialState, actions: 
 type ActionsType = IncACType | ResetACType | SetMaxCountACType
   | SetStartCountACType | SetErrorMessageACType | SetACType
 
-type IncACType = ReturnType<typeof incAC>
-export const incAC = () => ({type: "INCREMENT"} as const)
 
-type ResetACType = ReturnType<typeof resetAC>
-export const resetAC = () => {
-  return {
-    type: "RESET"
-  } as const
-}
+export const incCounterAC = () => ({type: "INCREMENT"} as const)
+type IncACType = ReturnType<typeof incCounterAC>
 
-type SetErrorMessageACType = ReturnType<typeof setErrorMessageAC>
-export const setErrorMessageAC = () => {
+export const resetCounterAC = () =>({type: "RESET"} as const)
+type ResetACType = ReturnType<typeof resetCounterAC>
+
+export const setErrorModeAC = () => {
   return {
-    type: "ERR-MESSAGE",
+    type: "ERROR-MODE",
     payload: {
       setting: true,
       err: true,
@@ -53,8 +47,8 @@ export const setErrorMessageAC = () => {
     }
   } as const
 }
+type SetErrorMessageACType = ReturnType<typeof setErrorModeAC>
 
-type SetMaxCountACType = ReturnType<typeof setMaxCountAC>
 export const setMaxCountAC = (newMax: number) => {
   return {
     type: "SET-MAX",
@@ -66,8 +60,8 @@ export const setMaxCountAC = (newMax: number) => {
     }
   } as const
 }
+type SetMaxCountACType = ReturnType<typeof setMaxCountAC>
 
-type SetStartCountACType = ReturnType<typeof setStartCountAC>
 export const setStartCountAC = (newStart: number) => {
   return {
     type: "SET-START",
@@ -79,10 +73,11 @@ export const setStartCountAC = (newStart: number) => {
     }
   } as const
 }
+type SetStartCountACType = ReturnType<typeof setStartCountAC>
 
-export const setAC = () => {
+export const setRunMode = () => {
   return {
-    type: "SET",
+    type: "SET-RUN-MODE",
     payload: {
       setting: false,
       err: false,
@@ -90,4 +85,4 @@ export const setAC = () => {
     }
   } as const
 }
-type SetACType = ReturnType<typeof setAC>
+type SetACType = ReturnType<typeof setRunMode>
