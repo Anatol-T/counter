@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from "./Button";
-import {MessageTpe} from "../App";
+import {MessageType} from "../App";
 
 type PropsType = {
   counter: number
-  message: MessageTpe
+  message: MessageType
   maxCount: number
   startCount: number
   setting: boolean
@@ -16,6 +16,7 @@ const Screen: React.FC<PropsType> =
      counter, maxCount, startCount, message,
      ...props
    }) => {
+
     const displayStl = message === "select values and hit: Set"
       ? {fontSize: "30px", color: "#383838"}
       : message === "Incorrect Value!"
@@ -24,6 +25,7 @@ const Screen: React.FC<PropsType> =
           color: counter === maxCount ? "red" : "#383838",
           fontSize: "150px"
         }
+
     return (
       <div className="Screen">
         <div className="Display" style={displayStl}>

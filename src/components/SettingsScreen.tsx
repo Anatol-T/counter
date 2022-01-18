@@ -27,7 +27,7 @@ const SettingsScreen: React.FC<PropsType> = (
             style={stl}
             //onKeyPress={(e) =>  e.preventDefault()}
             onChange={(e) => {
-              props.setMaxHandler(+e.currentTarget.value)
+              props.setMaxHandler(e.currentTarget.valueAsNumber)
             }}/>
         </div>
         <div className="inputSet">

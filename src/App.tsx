@@ -1,74 +1,73 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import SettingsScreen from "./components/SettingsScreen";
 import Screen from "./components/Screen";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./redux/store";
+import {
+  CounterStateType,
+  incAC,
+  resetAC,
+  setAC,
+  setErrorMessageAC,
+  setMaxCountAC,
+  setStartCountAC
+} from "./redux/counterReducer";
 
-export type MessageTpe = "" | "select values and hit: Set" | "Incorrect Value!"
+export type MessageType = "" | "select values and hit: Set" | "Incorrect Value!"
 
 function App() {
-//test
-  const [counter, setCounter] = useState<number>(0);
-  const [maxCount, setMaxCount] = useState<number>(5);
-  const [startCount, setStartCount] = useState<number>(0)
-  const [setting, setSetting] = useState<boolean>(false)
-  const [err, setErr] = useState<boolean>(false)
-  const [message, setMessage] = useState<MessageTpe>('')
 
-  useEffect(()=>{
-    let savedSettings = localStorage.getItem("counter settings");
-    if (savedSettings) {
-      savedSettings = JSON.parse(savedSettings)
-    }
-    if (savedSettings) {
-      setMaxCount(+savedSettings[0])
-      setStartCount(+savedSettings[1])
-      setCounter(+savedSettings[1])
-    }
-  },[])
+  const {counter, maxCount, startCount, setting, err, message} =
+    useSelector<AppStateType, CounterStateType>(state=> state.counter)
 
-  const setMaxHandler = (max: number) => {
-    setSetting(true)
-    if (max >= 0) {
-      setMaxCount(max)
-      setErr(false)
-      setMessage("select values and hit: Set")
+  const dispatch = useDispatch()
+
+
+  // useEffect(()=>{
+  //   let savedSettings = localStorage.getItem("counter settings");
+  //   if (savedSettings) {
+  //     savedSettings = JSON.parse(savedSettings)
+  //   }
+  //   if (savedSettings) {
+  //     setMaxCount(+savedSettings[0])
+  //     setStartCount(+savedSettings[1])
+  //     setCounter(+savedSettings[1])
+  //   }
+  // },[])
+
+  const setMaxHandler = (newMax: number) => {
+
+    if (newMax >= 0) {
+      dispatch(setMaxCountAC(newMax))
     } else {
-      setErr(true)
-      setMessage("Incorrect Value!")
+      dispatch(setErrorMessageAC())
     }
 
   }
-  const setStartHandler = (stVal: number) => {
-    setSetting(true)
-    if (stVal >= 0 ) {
-      setStartCount(stVal)
-      setErr(false)
-      setMessage("select values and hit: Set")
+  const setStartHandler = (newStart: number) => {
+    if (newStart >= 0 ) {
+      dispatch(setStartCountAC(newStart))
     } else {
-      setErr(true)
-      setMessage("Incorrect Value!")
+      dispatch(setErrorMessageAC())
     }
   }
   const inc = () => {
     if (counter < maxCount) {
-      setCounter(counter + 1)
+      dispatch(incAC())
     }
   }
   const reset = () => {
-    if (counter > 0) setCounter(startCount)
+    dispatch(resetAC())
   }
 
   const set = () => {
     if ( maxCount >= startCount) {
-      setSetting(false)
-      setCounter(startCount)
-      setErr(false)
-      setMessage('')
-      localStorage
-        .setItem("counter settings", JSON.stringify([maxCount, startCount]))
+      // localStorage
+      //   .setItem("counter settings", JSON.stringify([maxCount, startCount]))
+      dispatch(setAC())
     } else {
-      setErr(true)
-      setMessage("Incorrect Value!")
+      dispatch(setErrorMessageAC())
     }
   }
 
@@ -97,34 +96,3 @@ function App() {
 }
 
 export default App;
-// const setMaxHandler = (max: number) => {
-//   setSetting(true)
-//   if (max >= startCount) {
-//     setMaxCount(max)
-//     setErr(false)
-//     setMessage("select values and hit: Set")
-//   } else {
-//     setErr(true)
-//     setMessage("Incorrect Value!")
-//   }
-//
-// }
-// const setStartHandler = (stVal: number) => {
-//   setSetting(true)
-//   if (stVal >= 0 && stVal <= maxCount) {
-//     setStartCount(stVal)
-//     setErr(false)
-//     setMessage("select values and hit: Set")
-//   } else {
-//     setErr(true)
-//     setMessage("Incorrect Value!")
-//   }
-// }
-// const set = () => {
-//   setSetting(false)
-//   setCounter(startCount)
-//   setErr(false)
-//   setMessage('')
-//   localStorage
-//     .setItem("counter settings", JSON.stringify([maxCount, startCount]))
-// }
