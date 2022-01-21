@@ -27,7 +27,7 @@ const SettingsScreen: React.FC<PropsType> = (
             style={stl}
             //onKeyPress={(e) =>  e.preventDefault()}
             onChange={(e) => {
-              props.setMaxHandler(e.currentTarget.valueAsNumber)
+              props.setMaxHandler(+e.currentTarget.value)
             }}/>
         </div>
         <div className="inputSet">
@@ -36,7 +36,7 @@ const SettingsScreen: React.FC<PropsType> = (
             className="input" type="number" value={startValue.toString()}
             style={stl}
             onChange={(e) => {
-              props.setStartHandler(e.currentTarget.valueAsNumber)
+              props.setStartHandler(+e.currentTarget.value)
             }}/>
         </div>
       </div>
